@@ -1,0 +1,83 @@
+<%= form_for @property do |form| %> <% if
+property.errors.any? %>
+<div id="error_explanation">
+  <h2>
+    <%= pluralize(property.errors.count, "error") %> prohibited this property
+    from being saved:
+  </h2>
+
+  <ul>
+    <% property.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
+<div class="field">
+  <%= form.label :property %> <%= form.text_field :property %>
+</div>
+
+<div class="field"><%= form.label :rent %> <%= form.text_field :rent %>RWF</div>
+
+<div class="field">
+  <%= form.label :building_age %> <%= form.text_field :building_age %> year/year old
+</div>
+
+<div class="field">
+  <%= form.label :address %> <%= form.text_area :address %>
+</div>
+
+<div class="field">
+  <%= form.label :remarks %> <%= form.text_area :remarks %>
+</div>
+<hr />
+<% if action_name=='new' %>
+  <%2.times do |x| %>
+  <h1>Name of railway line <%= x +1 %></h1>
+  <%=form.fields_for :nearest_stations do |f| %>
+  <div class="field">
+      <%= f.label :name_of_railway %>
+      <%= f.text_field :name_of_railway %>
+    </div>
+
+    <div class="field">
+      <%= f.label :station_name %>
+      <%= f.text_field :station_name %>
+    </div>
+
+    <div class="field">
+      <%= f.label :time %>
+      <%= f.text_field :time %>min / mins
+    </div>
+
+
+  <% end %>
+  <% end %>
+  <% end %>
+  <% if action_name=='edit' %>
+  <% x=0 %>
+  <%=form.fields_for :nearest_stations do |f| %>
+  <% x+=1 %>
+  <h1>Name of railway line <%= x %> </h1>
+  <div class="field">
+      <%= f.label :name_of_railway %>
+      <%= f.text_field :name_of_railway %>
+    </div>
+
+    <div class="field">
+      <%= f.label :station_name %>
+      <%= f.text_field :station_name %>
+    </div>
+
+    <div class="field">
+      <%= f.label :time %>
+      <%= f.text_field :time %>min / mins
+    </div>
+
+
+<% end %>
+
+<% end %>
+<div class="actions"><%= form.submit %></div>
+<% end %>

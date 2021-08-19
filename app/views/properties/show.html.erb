@@ -1,0 +1,65 @@
+<p id="notice"><%= notice %></p>
+<h1>Property Detail</h1>
+
+<p>
+  <strong>Property:</strong>
+  <%= @property.property %>
+</p>
+
+<p>
+  <strong>Rent:</strong>
+  <%= @property.rent %>
+</p>
+
+<p>
+  <strong>Building age:</strong>
+  <%= @property.building_age %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @property.address %>
+</p>
+
+<p>
+  <strong>Remarks:</strong>
+  <%= @property.remarks %>
+</p>
+<hr />
+<% @property.nearest_stations.each_with_index do |nearest_station, index| %>
+<% if nearest_station.name_of_railway != "" && nearest_station.station_name != "" &&  nearest_station.time !="" %>
+<h1>Nearest Station <%= index +1 %></h1>
+<p>
+  <strong>Name of railway:</strong>
+  <%= nearest_station.name_of_railway %>
+</p>
+
+<p>
+  <strong>Station name:</strong>
+  <%= nearest_station.station_name %>
+</p>
+
+<p>
+  <strong>How many minutes walk:</strong>
+  <%= nearest_station.time %>
+</p>
+<% elsif nearest_station.name_of_railway != ""|| nearest_station.station_name != ""||  nearest_station.time !="" %>
+<h1>Nearest Station <%= index +1 %></h1>
+<p>
+  <strong>Name of railway:</strong>
+  <%= nearest_station.name_of_railway %>
+</p>
+
+<p>
+  <strong>Station name:</strong>
+  <%= nearest_station.station_name %>
+</p>
+
+<p>
+  <strong>Time:</strong>
+  <%= nearest_station.time %>
+</p>
+<% end %>
+<% end %>
+<%= link_to 'Edit', edit_property_path(@property) %> | <%= link_to 'Back',
+properties_path %>
